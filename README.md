@@ -1,18 +1,36 @@
 ## Training with Our Own Custom Dataset
 
 ### Prepare the custom dataset
-```
-├── custom_data
-│   └── WASTE2020
-│       ├── Annotations
-│       │   ├── single_can
-│       │   └── single_vinyl
-│       └── Images
-│           ├── single_can
-│           └── single_vinyl
-```
-- Annotations의 subdirectories 안에 VOC포맷의 xml 파일들
-- Images의 subdirectories 안에 png 파일들
+1. custom dataset 디렉토리 스트럭쳐
+     ```
+     .
+     ├── custom_data
+     │   └── WASTE2020
+     │       ├── Annotations
+     │       │   ├── single_can
+     │       │   └── single_vinyl
+     │       └── Images
+     │           ├── single_can
+     │           └── single_vinyl
+     ```
+     - Annotations의 subdirectories 안에 VOC포맷의 xml 파일들
+     - Images의 subdirectories 안에 png 파일들
+
+2. configs/custom_classes.txt 추가해주기
+     ```
+     configs
+     ├── VOC2012_person_test.txt
+     ├── coco_classes.txt
+     ├── custom_classes.txt
+     ├── tiny_yolo3_anchors.txt
+     ├── voc_classes.txt
+     ├── yolo2-tiny-voc_anchors.txt
+     ├── yolo2-tiny_anchors.txt
+     ├── yolo2-voc_anchors.txt
+     ├── yolo2_anchors.txt
+     ├── yolo3_anchors.txt
+     └── yolo4_anchors.txt
+     ```
 
 ### Usage
 1.  VOC -> YOLO 포맷
@@ -27,11 +45,16 @@
      ```
 
 ### TODO
-1. eval 및 test
-2. 데이터 추가
+0. eval 및 test 
+1. 데이터 추가
+2. multi gpu로 학습시켜보기
 3. hyperparameter tuning
+     - model, anchors ...
 
 
+
+
+👇🏿 README 원문
 
 -----
 -----
