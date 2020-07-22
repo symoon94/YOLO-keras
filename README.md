@@ -1,3 +1,41 @@
+## Training with Our Own Custom Dataset
+
+### Prepare the custom dataset
+```
+├── custom_data
+│   └── WASTE2020
+│       ├── Annotations
+│       │   ├── single_can
+│       │   └── single_vinyl
+│       └── Images
+│           ├── single_can
+│           └── single_vinyl
+```
+- Annotations의 subdirectories 안에 VOC포맷의 xml 파일들
+- Images의 subdirectories 안에 png 파일들
+
+### Usage
+1.  VOC -> YOLO 포맷
+     ```
+     cd tools/dataset_converter && python custom_voc_annotation.py
+     ```
+2. Train
+
+     Example
+     ```
+     python train.py --annotation_file tools/dataset_converter/2020_train.txt --transfer_epoch 200 --total_epoch 250 --val_split 0.2 --classes_path configs/custom_classes.txt --eval_online --model_type yolo3_efficientnet
+     ```
+
+### TODO
+1. eval 및 test
+2. 데이터 추가
+3. hyperparameter tuning
+
+
+
+-----
+-----
+
 # TF Keras YOLOv4/v3/v2 Modelset
 
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](LICENSE)
