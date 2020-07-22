@@ -12,8 +12,14 @@ classes = ["can_s", "vinyl_s"]
 
 class_count = {}
 
-def convert_annotation(dataset_path, year, class_name, image_id, list_file, include_difficult):
-    in_file = open('%s/WASTE%s/Annotations/%s/%s.xml'%(dataset_path, year, class_name, image_id))
+def convert_annotation(dataset_path, year, file_string, class_name, image_id, list_file, include_difficult):
+    try:
+        in_file = open('%s/WASTE%s/Annotations/%s/%s.xml'%(dataset_path, year, class_name, image_id))
+    except:
+        print("FILE DOES NOT EXIST: %s/WASTE%s/Annotations/%s/%s.xml"%(dataset_path, year, class_name, image_id))
+        return False
+    list_file.write(file_string)
+
     tree=ET.parse(in_file)
     root = tree.getroot()
 
@@ -33,6 +39,7 @@ def convert_annotation(dataset_path, year, class_name, image_id, list_file, incl
         b = (int(xmlbox.find('xmin').text), int(xmlbox.find('ymin').text), int(xmlbox.find('xmax').text), int(xmlbox.find('ymax').text))
         list_file.write(" " + ",".join([str(a) for a in b]) + ',' + str(cls_id))
         class_count[cls] = class_count[cls] + 1
+    return True
 
 
 parser = argparse.ArgumentParser(description='convert PascalVOC dataset annotation to txt annotation file')
@@ -65,12 +72,12 @@ for year, image_set in sets:
     path = dataset_realpath + f"/WASTE{year}/Images/"
     files = [f for f in glob.glob(path + "**/*.png", recursive=True)]
     for file_string in files:
-        list_file.write(file_string)
         file_path_split = file_string.split("/")
         class_name = file_path_split[-2]
         image_id = file_path_split[-1].rstrip(".png")
-        convert_annotation(dataset_realpath, year, class_name, image_id, list_file, args.include_difficult)
-        list_file.write('\n')
+        file_exist = convert_annotation(dataset_realpath, year, file_string, class_name, image_id, list_file, args.include_difficult)
+        if file_exist:
+            list_file.write('\n')
 
     list_file.close()
 
