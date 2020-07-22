@@ -35,39 +35,6 @@ def convert_annotation(dataset_path, year, class_name, image_id, list_file, incl
         class_count[cls] = class_count[cls] + 1
 
 
-# def has_object(dataset_path, year, image_id, include_difficult):
-#     try:
-#         in_file = open('%s/WASTE%s/Annotations/%s.xml'%(dataset_path, year, image_id))
-#     except:
-#         # bypass image if no annotation
-#         return False
-#     tree=ET.parse(in_file)
-#     root = tree.getroot()
-#     count = 0
-
-#     for obj in root.iter('object'):
-#         difficult = obj.find('difficult')
-#         if difficult is None:
-#             difficult = '0'
-#         else:
-#             difficult = difficult.text
-#         cls = obj.find('name').text
-#         if cls not in classes:
-#             continue
-#         if not include_difficult and int(difficult)==1:
-#             continue
-#         count = count +1
-#     return count != 0
-
-
-# def get_classes(classes_path):
-#     '''loads the classes'''
-#     with open(classes_path) as f:
-#         classes = f.readlines()
-#     classes = [c.strip() for c in classes]
-#     return classes
-
-
 parser = argparse.ArgumentParser(description='convert PascalVOC dataset annotation to txt annotation file')
 parser.add_argument('--dataset_path', type=str, help='path to custom dataset, default is ../../custom_data', default=os.getcwd()+'/../../custom_data')
 parser.add_argument('--year', type=str, help='subset path of year (2020), default will cover 2020', default=None)
@@ -78,16 +45,11 @@ parser.add_argument('--include_difficult', action="store_true", help='to include
 parser.add_argument('--include_no_obj', action="store_true", help='to include no object image', default=False)
 args = parser.parse_args()
 
-# # update class names
-# if args.classes_path:
-#     classes = get_classes(args.classes_path)
-
 # get real path for dataset
 dataset_realpath = os.path.realpath(args.dataset_path)
 
 # create output path
 os.makedirs(args.output_path, exist_ok=True)
-
 
 # get specific sets to convert
 if args.year is not None:
@@ -110,26 +72,8 @@ for year, image_set in sets:
         convert_annotation(dataset_realpath, year, class_name, image_id, list_file, args.include_difficult)
         list_file.write('\n')
 
-
-    # image_ids = open('%s/WASTE%s/ImageSets/Main/%s.txt'%(dataset_realpath, year, image_set)).read().strip().split()
-    # list_file = open('%s/%s_%s.txt'%(args.output_path, year, image_set), 'w')
-    # for image_id in image_ids:
-    #     file_string = '%s/WASTE%s/JPEGImages/%s.jpg'%(dataset_realpath, year, image_id)
-    #     # check if the image file exists
-    #     if not os.path.exists(file_string):
-    #         file_string = '%s/WASTE%s/JPEGImages/%s.jpeg'%(dataset_realpath, year, image_id)
-    #     if not os.path.exists(file_string):
-    #         raise ValueError('image file for id: {} not exists'.format(image_id))
-
-    #     if has_object(dataset_realpath, year, image_id, args.include_difficult):
-    #         list_file.write(file_string)
-    #         convert_annotation(dataset_realpath, year, image_id, list_file, args.include_difficult)
-    #         list_file.write('\n')
-    #     elif args.include_no_obj:
-    #         # include no object image. just write file path
-    #         list_file.write(file_string)
-    #         list_file.write('\n')
     list_file.close()
+
     # print out item number statistic
     print('\nDone for %s_%s.txt. classes number statistic'%(year, image_set))
     print('Image number: %d'%(len(files)))
