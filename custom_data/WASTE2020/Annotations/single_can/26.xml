@@ -1,0 +1,26 @@
+<annotation>
+	<folder>single_can</folder>
+	<filename>26.png</filename>
+	<path>/home/mani/Downloads/waste_int/can/single_can/26.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>255</width>
+		<height>255</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>can_s</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>25</xmin>
+			<ymin>1</ymin>
+			<xmax>255</xmax>
+			<ymax>255</ymax>
+		</bndbox>
+	</object>
+</annotation>

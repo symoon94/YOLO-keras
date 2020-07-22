@@ -2,7 +2,7 @@ numpy==1.17.5
 scipy
 opencv-python
 opencv-contrib-python
-tensorflow-gpu
+#tensorflow-gpu
 keras_applications
 tensorflow-model-optimization
 matplotlib

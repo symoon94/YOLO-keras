@@ -1,5 +1,9 @@
+VOCdevkit/
+2007_train.txt
+2007_val.txt
+
 *.jpg
-*.png
+# *.png
 *.weights
 *.h5
 logs/

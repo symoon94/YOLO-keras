@@ -1,0 +1,26 @@
+<annotation>
+	<folder>single_vinyl</folder>
+	<filename>9.png</filename>
+	<path>C:\Users\ehdwn\Desktop\알바\이미지\vinyl\single_vinyl\9.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>183</width>
+		<height>275</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>vinyl_s</name>
+		<pose>Unspecified</pose>
+		<truncated>1</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>1</xmin>
+			<ymin>100</ymin>
+			<xmax>160</xmax>
+			<ymax>273</ymax>
+		</bndbox>
+	</object>
+</annotation>
